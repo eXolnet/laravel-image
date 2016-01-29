@@ -20,6 +20,14 @@ class Image extends Model implements Imageable
 	protected $fillable = ['filename'];
 
 	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getFilename()
