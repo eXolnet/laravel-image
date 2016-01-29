@@ -1,9 +1,24 @@
 <?php namespace Exolnet\Image;
 
-use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\Model;
+use \DateTime;
 
 class Image extends Model implements Imageable
 {
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'image';
+
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $fillable = ['filename'];
+
 	/**
 	 * @return string
 	 */
@@ -37,5 +52,21 @@ class Image extends Model implements Imageable
 	public function getImageUrl()
 	{
 		return asset('uploads/images/'. $this->getFilename());
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getCreatedAt()
+	{
+		return $this->created_at;
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getUpdatedAt()
+	{
+		return $this->updated_at;
 	}
 }
