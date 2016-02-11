@@ -49,9 +49,17 @@ class Image extends Model implements Imageable
 	/**
 	 * @return string
 	 */
+	public function getImageBasePath()
+	{
+		return public_path('uploads/images');
+	}
+
+	/**
+	 * @return string
+	 */
 	public function getImagePath()
 	{
-		return public_path('uploads/images/'. $this->getFilename());
+		return $this->getImageBasePath() .'/'. $this->getFilename();
 	}
 
 	/**

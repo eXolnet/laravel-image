@@ -8,10 +8,9 @@ interface Imageable
 	public function getFilename();
 
 	/**
-	 * @param string $filename
 	 * @return string
 	 */
-	public function setFilename($filename);
+	public function getImageBasePath();
 
 	/**
 	 * @return string
