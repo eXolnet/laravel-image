@@ -1,7 +1,7 @@
 <?php
 
 use Exolnet\Image\ImageService;
-use Illuminate\Filesystem\Filesystem;
+use Exolnet\Image\Repository\FilesystemRepository;
 use Mockery as m;
 
 class ImageServiceTest extends \PHPUnit_Framework_TestCase
@@ -14,13 +14,13 @@ class ImageServiceTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @var \Mockery\MockInterface
 	 */
-	protected $filesystem;
+	protected $filesystemRepository;
 
 	public function setUp()
 	{
-		$this->filesystem = m::mock(Filesystem::class);
+		$this->filesystemRepository = m::mock(FilesystemRepository::class);
 
-		$this->service = new ImageService($this->filesystem);
+		$this->service = new ImageService($this->filesystemRepository);
 	}
 
 	public function testItIsInitializable()
