@@ -34,17 +34,17 @@ class FilesystemRepository
 			throw new ServiceValidationException('Could not store image with an empty filename.');
 		}
 
-		$basePath = $image->getImageBasePath();
+		$path = dirname($image->getImagePath());
 
-		if ( ! $this->filesystem->exists($basePath)) {
-			$this->filesystem->makeDirectory($basePath, 0755, true);
+		if ( ! $this->filesystem->exists($path)) {
+			$this->filesystem->makeDirectory($path, 0755, true);
 		}
 
-		if ( ! $this->filesystem->isWritable($basePath)) {
-			throw new ServiceValidationException('The image base path "'. $basePath .'" is not writable.');
+		if ( ! $this->filesystem->isWritable($path)) {
+			throw new ServiceValidationException('The image base path "'. $path .'" is not writable.');
 		}
 
-		$file->move($basePath, $image->getFilename());
+		$file->move($path, $image->getFilename());
 
 		return true;
 	}
