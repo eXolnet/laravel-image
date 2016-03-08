@@ -30,6 +30,10 @@ class FilesystemRepository
 	 */
 	public function store(Imageable $image, File $file)
 	{
+		if ( ! $image->getFilename()) {
+			throw new ServiceValidationException('Could not store image with an empty filename.');
+		}
+
 		$basePath = $image->getImageBasePath();
 
 		if ( ! $this->filesystem->exists($basePath)) {
