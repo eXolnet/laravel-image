@@ -34,7 +34,8 @@ class FilesystemRepository
 			throw new ServiceValidationException('Could not store image with an empty filename.');
 		}
 
-		$path = dirname($image->getImagePath());
+		$path     = dirname($image->getImagePath());
+		$filename = basename($image->getImagePath());
 
 		if ( ! $this->filesystem->exists($path)) {
 			$this->filesystem->makeDirectory($path, 0755, true);
@@ -44,7 +45,7 @@ class FilesystemRepository
 			throw new ServiceValidationException('The image base path "'. $path .'" is not writable.');
 		}
 
-		$file->move($path, $image->getFilename());
+		$file->move($path, $filename);
 
 		return true;
 	}
