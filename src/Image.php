@@ -51,7 +51,7 @@ class Image extends Model implements Imageable
 	 */
 	public function getImageBasePath()
 	{
-		return public_path('uploads/images');
+		return public_path('uploads');
 	}
 
 	/**
@@ -67,7 +67,7 @@ class Image extends Model implements Imageable
 	 */
 	public function getImageUrl()
 	{
-		return asset('uploads/images/'. $this->getFilename());
+		return asset('uploads/'. $this->getFilename());
 	}
 
 	/**
