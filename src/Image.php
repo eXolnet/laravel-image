@@ -1,7 +1,6 @@
 <?php namespace Exolnet\Image;
 
-use \Illuminate\Database\Eloquent\Model;
-use \DateTime;
+use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model implements Imageable
 {
