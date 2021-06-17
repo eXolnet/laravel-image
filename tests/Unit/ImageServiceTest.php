@@ -9,25 +9,25 @@ use Mockery as m;
 
 class ImageServiceTest extends UnitTest
 {
-	/**
-	 * @var \Exolnet\Image\ImageService
-	 */
-	protected $service;
+    /**
+     * @var \Exolnet\Image\ImageService
+     */
+    protected $service;
 
-	/**
-	 * @var \Mockery\MockInterface
-	 */
-	protected $filesystemRepository;
+    /**
+     * @var \Mockery\MockInterface
+     */
+    protected $filesystemRepository;
 
-	public function setUp(): void
-	{
-		$this->filesystemRepository = m::mock(FilesystemRepository::class);
+    public function setUp(): void
+    {
+        $this->filesystemRepository = m::mock(FilesystemRepository::class);
 
-		$this->service = new ImageService($this->filesystemRepository);
-	}
+        $this->service = new ImageService($this->filesystemRepository);
+    }
 
-	public function testItIsInitializable()
-	{
-		$this->assertInstanceOf(ImageService::class, $this->service);
-	}
+    public function testItIsInitializable()
+    {
+        $this->assertInstanceOf(ImageService::class, $this->service);
+    }
 }

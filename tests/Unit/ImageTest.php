@@ -7,18 +7,18 @@ use Exolnet\Image\Tests\UnitTest;
 
 class ImageTest extends UnitTest
 {
-	/**
-	 * @var \Exolnet\Image\Image
-	 */
-	protected $model;
+    /**
+     * @var \Exolnet\Image\Image
+     */
+    protected $model;
 
-	public function setUp(): void
-	{
-		$this->model = new Image;
-	}
+    public function setUp(): void
+    {
+        $this->model = new Image;
+    }
 
-	public function testItIsInitializable()
-	{
-		$this->assertInstanceOf(Image::class, $this->model);
-	}
+    public function testItIsInitializable()
+    {
+        $this->assertInstanceOf(Image::class, $this->model);
+    }
 }
