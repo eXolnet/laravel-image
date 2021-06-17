@@ -1,8 +1,11 @@
 <?php
 
-use Exolnet\Image\Image;
+namespace Exolnet\Image\Test\Unit;
 
-class ImageTest extends \PHPUnit_Framework_TestCase
+use Exolnet\Image\Image;
+use Exolnet\Image\Tests\UnitTest;
+
+class ImageTest extends UnitTest
 {
 	/**
 	 * @var \Exolnet\Image\Image

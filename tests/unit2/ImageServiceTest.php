@@ -1,10 +1,13 @@
 <?php
 
+namespace Exolnet\Image\Test\Unit;
+
 use Exolnet\Image\ImageService;
 use Exolnet\Image\Repository\FilesystemRepository;
+use Exolnet\Image\Tests\UnitTest;
 use Mockery as m;
 
-class ImageServiceTest extends \PHPUnit_Framework_TestCase
+class ImageServiceTest extends UnitTest
 {
 	/**
 	 * @var \Exolnet\Image\ImageService
@@ -16,7 +19,7 @@ class ImageServiceTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected $filesystemRepository;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->filesystemRepository = m::mock(FilesystemRepository::class);
 
