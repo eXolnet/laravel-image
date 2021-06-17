@@ -1,6 +1,6 @@
 <?php
 
-namespace Exolnet\Image\Test\Unit;
+namespace Exolnet\Image\Tests\Unit;
 
 use Exolnet\Image\ImageService;
 use Exolnet\Image\Repository\FilesystemRepository;

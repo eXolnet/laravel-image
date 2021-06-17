@@ -1,6 +1,6 @@
 <?php
 
-namespace Exolnet\Image\Test\Unit;
+namespace Exolnet\Image\Tests\Unit;
 
 use Exolnet\Image\Image;
 use Exolnet\Image\Tests\UnitTest;
@@ -12,7 +12,7 @@ class ImageTest extends UnitTest
 	 */
 	protected $model;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->model = new Image;
 	}
