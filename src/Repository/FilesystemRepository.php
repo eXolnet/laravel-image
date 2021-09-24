@@ -1,7 +1,7 @@
 <?php namespace Exolnet\Image\Repository;
 
-use Exolnet\Core\Exceptions\ServiceValidationException;
 use Exolnet\Image\Imageable;
+use \InvalidArgumentException;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -26,12 +26,12 @@ class FilesystemRepository
      * @param \Exolnet\Image\Imageable                    $image
      * @param \Symfony\Component\HttpFoundation\File\File $file
      * @return bool
-     * @throws \Exolnet\Core\Exceptions\ServiceValidationException
+     * @throws \InvalidArgumentException
      */
-    public function store(Imageable $image, File $file)
+    public function store(Imageable $image, File $file): bool
     {
         if (! $image->getFilename()) {
-            throw new ServiceValidationException('Could not store image with an empty filename.');
+            throw new InvalidArgumentException('Could not store image with an empty filename.');
         }
 
         $path     = dirname($image->getImagePath());
@@ -42,7 +42,7 @@ class FilesystemRepository
         }
 
         if (! $this->filesystem->isWritable($path)) {
-            throw new ServiceValidationException('The image base path "'. $path .'" is not writable.');
+            throw new InvalidArgumentException('The image base path "'. $path .'" is not writable.');
         }
 
         $file->move($path, $filename);
