@@ -66,9 +66,8 @@ class ImageService
     public function deleteImage(Image $image)
     {
         $this->destroy($image);
-        $image->delete(); // TODO-FG: Move this to an Eloquent Repository.
 
-        return false;
+        return $image->delete(); // TODO-FG: Move this to an Eloquent Repository.
     }
 
     /**

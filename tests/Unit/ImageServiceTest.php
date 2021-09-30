@@ -167,12 +167,13 @@ class ImageServiceTest extends UnitTest
     /**
      * @test
      * @return void
+     * @throws \Exception
      */
     public function testDeleteImage()
     {
         $this->filesystemRepository->shouldReceive('destroy')->with($this->image)->andReturn(true);
         $this->image->shouldReceive('delete')->andReturn(true);
-        $this->assertFalse($this->service->deleteImage($this->image));
+        $this->assertTrue($this->service->deleteImage($this->image));
     }
 
     /**
