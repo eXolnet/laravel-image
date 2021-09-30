@@ -17,7 +17,7 @@ class FilesystemRepositoryTest extends UnitTest
 
     public function setUp(): void
     {
-        $this->filesystem = new Filesystem();
+        $this->filesystem = m::mock(Filesystem::class)->makePartial();
         $this->filesystemRepository = new FilesystemRepository($this->filesystem);
     }
 
@@ -30,16 +30,20 @@ class FilesystemRepositoryTest extends UnitTest
         $this->assertInstanceOf(FilesystemRepository::class, $this->filesystemRepository);
     }
 
+    /**
+     * @test
+     * @return void
+     */
     public function testStore()
     {
         $file = m::mock(File::class);
         $image = m::mock(Image::class);
 
-        $fakePath = '/src/image.png';
-        $fakeFileName = 'image.png';
+        $fakeName = '/src/image.png';
+        $fakePath = 'image.png';
 
-        $image->shouldReceive('getFileName')->once()->andReturn($fakePath);
-        $image->shouldReceive('getImagePath')->twice()->andReturn($fakeFileName);
+        $image->shouldReceive('getFileName')->once()->andReturn($fakeName);
+        $image->shouldReceive('getImagePath')->twice()->andReturn($fakePath);
 
         $file->shouldReceive('move')->once()->withArgs(
             function ($fakePath, $fakeFileName) {
@@ -70,11 +74,77 @@ class FilesystemRepositoryTest extends UnitTest
      * @test
      * @return void
      */
+    public function testStorePathDoesNotExist(): void
+    {
+        $file = m::mock(File::class);
+        $image = m::mock(Image::class);
+
+        $fakeName = '/src/image.png';
+        $fakePath = 'image.png';
+
+        $image->shouldReceive('getFileName')->once()->andReturn($fakeName);
+        $image->shouldReceive('getImagePath')->twice()->andReturn($fakePath);
+
+        $this->filesystem->shouldReceive('exists')->with(dirname($fakePath))
+            ->once()->andReturn(false);
+        $this->filesystem->shouldReceive('makeDirectory')
+            ->with(dirname($fakePath), 0755, true)->once()->andReturn(false);
+
+        $file->shouldReceive('move')->once()->withArgs(
+            function ($fakePath, $fakeFileName) {
+                return true;
+            }
+        )->andReturnSelf();
+
+        $this->assertTrue($this->filesystemRepository->store($image, $file));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function testStoreIsNotWritable(): void
+    {
+        $file = m::mock(File::class);
+        $image = m::mock(Image::class);
+
+        $fakeName = '/src/image.png';
+        $fakePath = 'image.png';
+
+        $this->expectExceptionMessage('The image base path "'. dirname($fakePath) .'" is not writable.');
+
+        $image->shouldReceive('getFileName')->once()->andReturn($fakeName);
+        $image->shouldReceive('getImagePath')->twice()->andReturn($fakePath);
+
+        $this->filesystem->shouldReceive('isWritable')->once()->andReturn(false);
+
+        $this->filesystemRepository->store($image, $file);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
     public function testDestroy(): void
     {
         $image = m::mock(Image::class);
         $fakeFileName = 'image.png';
         $image->shouldReceive('getImagePath')->once()->andReturn($fakeFileName);
+
+        $this->assertTrue($this->filesystemRepository->destroy($image));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function testDestroyDeleteImage(): void
+    {
+        $image = m::mock(Image::class);
+        $fakePath = 'image.png';
+        $image->shouldReceive('getImagePath')->twice()->andReturn($fakePath);
+        $this->filesystem->shouldReceive('exists')->with($fakePath)->once()->andReturn(true);
+        $this->filesystem->shouldReceive('delete')->with($fakePath)->once()->andReturn(true);
 
         $this->assertTrue($this->filesystemRepository->destroy($image));
     }

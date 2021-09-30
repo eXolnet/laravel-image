@@ -39,6 +39,18 @@ class ImageServiceTest extends UnitTest
     }
 
     /**
+     * @return void
+     */
+    public function tearDown(): void
+    {
+        if ($container = m::getContainer()) {
+            $this->addToAssertionCount($container->mockery_getExpectationCount());
+        }
+
+        m::close();
+    }
+
+    /**
      * @test
      * @return void
      */
@@ -70,6 +82,67 @@ class ImageServiceTest extends UnitTest
      * @test
      * @return void
      */
+    public function testUpdateImage()
+    {
+        $this->filesystemRepository->shouldReceive('destroy')->andReturn('true');
+        $this->filesystemRepository->shouldReceive('store')->andReturn('true');
+
+        $this->image->shouldReceive('getId')->once()->andReturn(1);
+        $this->image->shouldReceive('save')->once();
+
+        $this->file->shouldReceive('getBaseName')->once()->andReturn('test');
+        $this->file->shouldReceive('guessExtension')->once()->andReturn('png');
+
+        $this->service->updateImage($this->image, $this->file);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function testUpdateImageByStateKeep()
+    {
+        $this->assertTrue($this->service->updateImageByState($this->image, 'keep', $this->file));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function testUpdateImageByStateReplace()
+    {
+        $this->filesystemRepository->shouldReceive('destroy')->with($this->image)->once()->andReturn(true);
+        $this->filesystemRepository->shouldReceive('store')->with($this->image, $this->file)->once()->andReturn(true);
+        $this->assertTrue($this->service->updateImageByState($this->image, 'replace', $this->file));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function testUpdateImageByStateNoFile()
+    {
+        $this->filesystemRepository->shouldReceive('destroy')->with($this->image)->once()->andReturn(true);
+        $this->assertFalse($this->service->updateImageByState($this->image, 'replace'));
+
+        $this->filesystemRepository->shouldReceive('destroy')->with($this->image)->once()->andReturn(true);
+        $this->assertFalse($this->service->updateImageByState($this->image, ''));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function testUpdateImageByStateNotKeepOrReplace()
+    {
+        $this->filesystemRepository->shouldReceive('destroy')->with($this->image)->once()->andReturn(true);
+        $this->assertFalse($this->service->updateImageByState($this->image, '', $this->file));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
     public function testDestroy()
     {
         $this->image = m::mock(Image::class)->makePartial();
@@ -89,6 +162,17 @@ class ImageServiceTest extends UnitTest
 
         $this->mockedDestroy(false);
         $this->assertFalse($this->service->replace($this->image, $this->file));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function testDeleteImage()
+    {
+        $this->filesystemRepository->shouldReceive('destroy')->with($this->image)->andReturn(true);
+        $this->image->shouldReceive('delete')->andReturn(true);
+        $this->assertFalse($this->service->deleteImage($this->image));
     }
 
     /**
