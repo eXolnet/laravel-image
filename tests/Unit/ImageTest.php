@@ -21,4 +21,10 @@ class ImageTest extends UnitTest
     {
         $this->assertInstanceOf(Image::class, $this->model);
     }
+
+    public function testGetSetFileName()
+    {
+        $this->model->setFilename('test.png');
+        $this->assertEquals('test.png', $this->model->getFilename());
+    }
 }

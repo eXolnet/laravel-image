@@ -27,7 +27,7 @@ class ImageService
      */
     public function createImage(File $file)
     {
-        $image = new Image();
+        $image = $this->makeImage();
 
         $fileName = Str::slug($file->getBasename()) .'.'. $file->guessExtension();
 
@@ -66,9 +66,8 @@ class ImageService
     public function deleteImage(Image $image)
     {
         $this->destroy($image);
-        $image->delete(); // TODO-FG: Move this to an Eloquent Repository.
 
-        return false;
+        return $image->delete(); // TODO-FG: Move this to an Eloquent Repository.
     }
 
     /**
@@ -123,5 +122,13 @@ class ImageService
         }
 
         return false;
+    }
+
+    /**
+     * @return \Exolnet\Image\Image
+     */
+    protected function makeImage(): Image
+    {
+        return new Image();
     }
 }
