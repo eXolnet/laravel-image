@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Image;
+<?php
+
+namespace Exolnet\Image;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -58,7 +60,7 @@ class Image extends Model implements Imageable
      */
     public function getImagePath()
     {
-        return $this->getImageBasePath() .'/'. $this->getFilename();
+        return $this->getImageBasePath() . '/' . $this->getFilename();
     }
 
     /**
@@ -66,7 +68,7 @@ class Image extends Model implements Imageable
      */
     public function getImageUrl()
     {
-        return asset('uploads/'. $this->getFilename());
+        return asset('uploads/' . $this->getFilename());
     }
 
     /**

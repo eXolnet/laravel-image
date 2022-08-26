@@ -1,7 +1,9 @@
-<?php namespace Exolnet\Image\Repository;
+<?php
+
+namespace Exolnet\Image\Repository;
 
 use Exolnet\Image\Imageable;
-use \InvalidArgumentException;
+use InvalidArgumentException;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -42,7 +44,7 @@ class FilesystemRepository
         }
 
         if (! $this->filesystem->isWritable($path)) {
-            throw new InvalidArgumentException('The image base path "'. $path .'" is not writable.');
+            throw new InvalidArgumentException('The image base path "' . $path . '" is not writable.');
         }
 
         $file->move($path, $filename);

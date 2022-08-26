@@ -14,7 +14,7 @@ class ImageTest extends UnitTest
 
     public function setUp(): void
     {
-        $this->model = new Image;
+        $this->model = new Image();
     }
 
     public function testItIsInitializable()
