@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Image;
+<?php
+
+namespace Exolnet\Image;
 
 use Exolnet\Image\Repository\FilesystemRepository;
 use Illuminate\Support\Str;
@@ -29,12 +31,12 @@ class ImageService
     {
         $image = $this->makeImage();
 
-        $fileName = Str::slug($file->getBasename()) .'.'. $file->guessExtension();
+        $fileName = Str::slug($file->getBasename()) . '.' . $file->guessExtension();
 
         $image->setFilename($fileName);
         $image->save();
 
-        $image->setFilename($image->getId().'-'.$fileName);
+        $image->setFilename($image->getId() . '-' . $fileName);
         $image->save();
 
         $this->store($image, $file);
@@ -50,7 +52,7 @@ class ImageService
     {
         $this->destroy($image);
 
-        $fileName = $image->getId() .'-'. Str::slug($file->getBasename()) .'.'. $file->guessExtension();
+        $fileName = $image->getId() . '-' . Str::slug($file->getBasename()) . '.' . $file->guessExtension();
 
         $image->setFilename($fileName);
         $image->save();

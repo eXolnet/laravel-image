@@ -111,7 +111,7 @@ class FilesystemRepositoryTest extends UnitTest
         $fakeName = '/src/image.png';
         $fakePath = 'image.png';
 
-        $this->expectExceptionMessage('The image base path "'. dirname($fakePath) .'" is not writable.');
+        $this->expectExceptionMessage('The image base path "' . dirname($fakePath) . '" is not writable.');
 
         $image->shouldReceive('getFileName')->once()->andReturn($fakeName);
         $image->shouldReceive('getImagePath')->twice()->andReturn($fakePath);

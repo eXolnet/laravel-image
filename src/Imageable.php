@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Image;
+<?php
+
+namespace Exolnet\Image;
 
 interface Imageable
 {
