@@ -5,11 +5,11 @@ namespace Exolnet\Image\Tests\Unit;
 use Exolnet\Image\Image;
 use Exolnet\Image\ImageService;
 use Exolnet\Image\Repository\FilesystemRepository;
-use Exolnet\Image\Tests\UnitTest;
+use Exolnet\Image\Tests\TestCase;
 use Mockery as m;
 use Symfony\Component\HttpFoundation\File\File;
 
-class ImageServiceTest extends UnitTest
+class ImageServiceTest extends TestCase
 {
     /** @var \Exolnet\Image\ImageService */
     protected $service;

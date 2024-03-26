@@ -4,12 +4,12 @@ namespace Exolnet\Image\Tests\Unit;
 
 use Exolnet\Image\Image;
 use Exolnet\Image\Repository\FilesystemRepository;
-use Exolnet\Image\Tests\UnitTest;
+use Exolnet\Image\Tests\TestCase;
 use Illuminate\Filesystem\Filesystem;
 use Mockery as m;
 use Symfony\Component\HttpFoundation\File\File;
 
-class FilesystemRepositoryTest extends UnitTest
+class FilesystemRepositoryTest extends TestCase
 {
     protected $filesystemRepository;
 

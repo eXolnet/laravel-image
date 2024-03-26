@@ -3,9 +3,9 @@
 namespace Exolnet\Image\Tests\Unit;
 
 use Exolnet\Image\Image;
-use Exolnet\Image\Tests\UnitTest;
+use Exolnet\Image\Tests\TestCase;
 
-class ImageTest extends UnitTest
+class ImageTest extends TestCase
 {
     /**
      * @var \Exolnet\Image\Image
