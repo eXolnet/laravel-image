@@ -3,9 +3,9 @@
 namespace Exolnet\Image\Tests;
 
 use Mockery;
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 
-abstract class UnitTest extends TestCase
+abstract class TestCase extends BaseTestCase
 {
     /**
      * @return void
