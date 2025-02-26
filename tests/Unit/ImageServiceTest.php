@@ -51,7 +51,6 @@ class ImageServiceTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testItIsInitializable()
@@ -60,7 +59,6 @@ class ImageServiceTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testCreateImage()
@@ -79,7 +77,6 @@ class ImageServiceTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testUpdateImage()
@@ -97,7 +94,6 @@ class ImageServiceTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testUpdateImageByStateKeep()
@@ -106,7 +102,6 @@ class ImageServiceTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testUpdateImageByStateReplace()
@@ -117,7 +112,6 @@ class ImageServiceTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testUpdateImageByStateNoFile()
@@ -130,7 +124,6 @@ class ImageServiceTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testUpdateImageByStateNotKeepOrReplace()
@@ -140,7 +133,6 @@ class ImageServiceTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testDestroy()
@@ -151,7 +143,6 @@ class ImageServiceTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testReplace()
@@ -165,7 +156,6 @@ class ImageServiceTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Exception
      */
