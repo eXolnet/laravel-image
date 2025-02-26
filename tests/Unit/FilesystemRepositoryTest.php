@@ -22,7 +22,6 @@ class FilesystemRepositoryTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testItIsInitializable()
@@ -31,7 +30,6 @@ class FilesystemRepositoryTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testStore()
@@ -55,7 +53,6 @@ class FilesystemRepositoryTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testStoreEmptyImageFileName(): void
@@ -71,7 +68,6 @@ class FilesystemRepositoryTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testStorePathDoesNotExist(): void
@@ -100,7 +96,6 @@ class FilesystemRepositoryTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testStoreIsNotWritable(): void
@@ -122,7 +117,6 @@ class FilesystemRepositoryTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testDestroy(): void
@@ -135,7 +129,6 @@ class FilesystemRepositoryTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testDestroyDeleteImage(): void
